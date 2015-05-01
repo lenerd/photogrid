@@ -39,10 +39,10 @@ function handle_dir
         if [ -f "$dest/$newpath" ]
         then
             echo "file exists: $dest/$newpath"
-            continue
+        else
+            echo "convert $i -resize 250x250 $dest/$newpath"
+            convert "$i" -resize 250x250 "$dest/$newpath"
         fi
-        echo "convert $i -resize 250x250 $dest/$newpath"
-        convert "$i" -resize 250x250 "$dest/$newpath"
         l1="        <li class=\"col-lg-3 col-md-4 col-xs-6 photo\">\n"
         l2="          <img src=\"$newpath\">\n"
         l3="          <br>\n"
