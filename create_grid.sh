@@ -34,10 +34,15 @@ function handle_dir
     find $dir -type f -maxdepth 1 -iname "*.jpg" -print0 | while IFS= read -r -d $'\0' i
     do
         subpath=${i#$path}
-        base_i=$(basename $i)
-        newpath=photos/${subpath%$(basename $i)}${base_i%.*}_250.jpg
+        base_i=$(basename "$i")
+        newpath="photos/${subpath%$(basename "$i")}${base_i%.*}_250.jpg"
+        if [ -f "$dest/$newpath" ]
+        then
+            echo "file exists: $dest/$newpath"
+            continue
+        fi
         echo "convert $i -resize 250x250 $dest/$newpath"
-        convert $i -resize 250x250 $dest/$newpath
+        convert "$i" -resize 250x250 "$dest/$newpath"
         l1="        <li class=\"col-lg-3 col-md-4 col-xs-6 photo\">\n"
         l2="          <img src=\"$newpath\">\n"
         l3="          <br>\n"
