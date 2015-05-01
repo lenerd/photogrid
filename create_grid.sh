@@ -36,7 +36,7 @@ function handle_dir
         subpath=${i#$path}
         base_i=$(basename $i)
         newpath=photos/${subpath%$(basename $i)}${base_i%.*}_250.jpg
-        echo "convert $i -resize 250x250 $newpath"
+        echo "convert $i -resize 250x250 $dest/$newpath"
         convert $i -resize 250x250 $dest/$newpath
         l1="        <li class=\"col-lg-3 col-md-4 col-xs-6 photo\">\n"
         l2="          <img src=\"$newpath\">\n"
