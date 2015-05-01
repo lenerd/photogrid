@@ -1,4 +1,15 @@
 #!/bin/sh
+# ==============================================================================
+# name:         create_grid.sh
+# description:  Creates a bootstrap powered HTML website displaying thumbnails
+#               of every photo in given directory.
+# author:       Lennart Braun <lenerd@posteo.de>
+# license:      MIT
+# date:         20150501
+# version:      0.1
+# requirements: imagemagick, sed
+# usage:        sh create_grid.sh photo_path destination
+# ==============================================================================
 
 function usage
 {
