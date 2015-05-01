@@ -1,0 +1,18 @@
+body {
+  padding-top: 50px;
+}
+
+ul {
+  padding: 0 0 0 0;
+  margin: 40px 0 0 0;
+}
+
+ul li.photo {
+  list-style: none;
+  margin-bottom: 25px;
+}
+
+/* .starter-template {
+  padding: 40px 15px;
+  text-align: center;
+}*/
