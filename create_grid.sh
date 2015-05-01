@@ -81,6 +81,7 @@ done
 sed -i -e "/@@NAVBAR@@/d" $dest/grid.html.in.tmp
 sed -e '/<ul class="row">/,+2 d' \
     -e '/href="index.html"/ s/<li>/<li class="active">/' \
+    -e '/<div class="content container">/ a \      <p class="lead">Use the navigation above to browse the photos.</p>' \
     $dest/grid.html.in.tmp > $dest/index.html
 find $path -type d -print0 | while IFS= read -r -d $'\0' d
 do
