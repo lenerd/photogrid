@@ -39,7 +39,13 @@ function handle_dir
 if [ "$#" -lt 2 ]
 then
     usage
-    exit 0
+    exit 1
+fi
+
+if ! [ -d "bootstrap-dist" ]
+then
+    echo "you need to extract bootstrap to ./bootstrap-dist"
+    exit 1
 fi
 
 set -e
