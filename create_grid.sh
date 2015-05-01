@@ -72,6 +72,7 @@ path=${1%/}/
 dest=${2%/}
 mkdir -p $dest
 cp grid.html.in $dest/grid.html.in.tmp
+cp -r css bootstrap-dist $dest/
 find $path -type d -print0 | while IFS= read -r -d $'\0' d
 do
     subpath=${d#$path}
@@ -85,12 +86,11 @@ do
 done
 sed -i -e "/@@NAVBAR@@/d" $dest/grid.html.in.tmp
 sed -e '/<ul class="row">/,+2 d' \
-    -e '/<div class="content container">/ a \      <p class="lead">Use the navigation above to browse the photos.</p>' \
+    -e '/<div class="content container">/ a \      <p class="lead">Use the navigation above to browse the photo collection.</p>' \
     $dest/grid.html.in.tmp > $dest/index.html
 find $path -type d -print0 | while IFS= read -r -d $'\0' d
 do
     handle_dir $path $dest $d
 done
 rm $dest/grid.html.in.tmp
-cp -r css bootstrap-dist $dest/
 exit 0
