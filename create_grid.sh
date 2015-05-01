@@ -33,7 +33,8 @@ function handle_dir
         $dest/grid.html.in.tmp > $dest/$file
     for i in $(find $dir -maxdepth 1 -iname "*.jpg"); do
         subpath=${i#$path}
-        newpath=photos/${subpath%$(basename $i)}$(basename $i .jpg)_250.jpg
+        base_i=$(basename $i)
+        newpath=photos/${subpath%$(basename $i)}${base_i%.*}_250.jpg
         echo "convert $i -resize 250x250 $newpath"
         convert $i -resize 250x250 $dest/$newpath
         l1="        <li class=\"col-lg-3 col-md-4 col-xs-6 photo\">\n"
