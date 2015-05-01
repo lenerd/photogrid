@@ -31,7 +31,8 @@ function handle_dir
     file=$(echo $subpath | sed -e 's!/!-!').html
     sed -e "/href=\"$file\"/ s/<li>/<li class=\"active\">/" \
         $dest/grid.html.in.tmp > $dest/$file
-    for i in $(find $dir -maxdepth 1 -iname "*.jpg"); do
+    find $dir -type f -maxdepth 1 -iname "*.jpg" -print0 | while IFS= read -r -d $'\0' i
+    do
         subpath=${i#$path}
         base_i=$(basename $i)
         newpath=photos/${subpath%$(basename $i)}${base_i%.*}_250.jpg
@@ -66,7 +67,7 @@ path=${1%/}/
 dest=${2%/}
 mkdir -p $dest
 cp grid.html.in $dest/grid.html.in.tmp
-for d in $(find $path -type d)
+find $path -type d -print0 | while IFS= read -r -d $'\0' d
 do
     subpath=${d#$path}
     if ! [ -n "$subpath" ]
@@ -81,7 +82,7 @@ sed -i -e "/@@NAVBAR@@/d" $dest/grid.html.in.tmp
 sed -e '/<ul class="row">/,+2 d' \
     -e '/href="index.html"/ s/<li>/<li class="active">/' \
     $dest/grid.html.in.tmp > $dest/index.html
-for d in $(find $path -type d)
+find $path -type d -print0 | while IFS= read -r -d $'\0' d
 do
     handle_dir $path $dest $d
 done
